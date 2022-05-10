@@ -16,19 +16,18 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   let cidade = req.body.nomeCidade
   let endpoint = 'https://api.openweathermap.org/data/2.5/weather'
-  let unidades = 'metric'
+  let unidade = 'metric'
   let idioma = 'pt_br'
-  let appid = process.env.API_KEY
-  let url = `${endpoint}?q=${cidade}&units=${unidades}&lang=${idioma}&appid=${appid}`
+  let apiKey = process.env.API_KEY
+  let url = `${endpoint}?q=${cidade}&units=${unidade}&lang=${idioma}&appid=${apiKey}`
 
-  axios.get(url)
-    .then(resposta => {
+  axios
+    .get(url)
+    .then((resposta) => {
       return resposta.data
     })
-    .then(dados => {
+    .then((dados) => {
       let temperatura = dados.main.temp
-      let temperaturaMax = dados.main.temp_max
-      let temperaturaMin = dados.main.temp_min
       let descricao = dados.weather[0].description
       let codigoIcone = dados.weather[0].icon
       let urlIcone = `http://openweathermap.org/img/wn/${codigoIcone}@2x.png`
@@ -38,11 +37,10 @@ app.post('/', (req, res) => {
       res.write(`<p>Temperatura em/no ${cidade}: ${temperatura}</p>`)
       res.send()
     })
-    .catch(erro => {
+    .catch((erro) => {
       console.log(erro)
     })
 })
-
 
 app.listen(porta, () => {
   console.log(`Servidor ouvindo na porta ${porta}.`)
