@@ -9,6 +9,8 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+app.set('view engine', 'ejs')
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/index.html'))
 })
@@ -31,11 +33,12 @@ app.post('/', (req, res) => {
       let descricao = dados.weather[0].description
       let codigoIcone = dados.weather[0].icon
       let urlIcone = `http://openweathermap.org/img/wn/${codigoIcone}@2x.png`
-      res.write('<h1>Previsão do Tempo</h1>')
-      res.write(`<p>Descrição: ${descricao}.</p>`)
-      res.write(`<img src="${urlIcone}" alt="icone">`)
-      res.write(`<p>Temperatura em/no ${cidade}: ${temperatura}</p>`)
-      res.send()
+      res.render('previsao', {
+        descricao: descricao,
+        linkIcone: urlIcone,
+        cidade: cidade,
+        temperatura: temperatura,
+      })
     })
     .catch((erro) => {
       console.log(erro)

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previsão</title>
+    <style>
+        .conteiner {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Previsão do Tempo</h1>
+    <h2>Descrição</h2>
+    <div class="conteiner">
+        <img src="<%= linkIcone %>" alt="icone">
+        <p><%= descricao %>.</p>
+    </div>
+    <h2>Temperatura</h2>
+    <p>Temperatura em/no <%= cidade %> é <%= temperatura %> °C.</p>
+</body>
+</html>
